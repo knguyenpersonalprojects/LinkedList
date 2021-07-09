@@ -16,7 +16,14 @@ int main()
 	InsertNode(&head, 99);
 	InsertNode(&head, 380);
 	InsertNode(&head, 1);
-
+	
 	PrintList(head);
+	DeleteNode(&head, 380);
+	cout << endl;
+	PrintList(head);
+	cout << endl;
+
+	ReverseList(&head);
+
 	system("Pause");
 }
