@@ -13,3 +13,4 @@ void DeleteNode(Linked_list* *head_ref, int num);
 void PrintList(Linked_list*head_ref);
 void ReverseList(Linked_list**head_ref);
 Linked_list DeleteMid(Linked_list** head_ref);
+void MergeList(Linked_list** head_ref_A, Linked_list* *head_ref_B);

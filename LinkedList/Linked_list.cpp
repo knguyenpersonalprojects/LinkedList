@@ -5,6 +5,7 @@
 void InsertNode(Linked_list**headNode, int value)
 {
 	Linked_list* current;
+	Linked_list* prev = nullptr;
 	//create a new node
 	Linked_list *newNode = new Linked_list();
 	//if there is not element in the list make prevNode point to the first node
@@ -19,6 +20,7 @@ void InsertNode(Linked_list**headNode, int value)
 		//assign the data value of the new node
 		
 		current = *headNode;
+		prev = current;
 		//if the head is greater then the value we are trying to insert
 		// make it the new head and add it in front
 		if (current->data > value) 
@@ -35,11 +37,21 @@ void InsertNode(Linked_list**headNode, int value)
 			//make the new node point to the previous Node pointing to
 			while (current->next != NULL && current->data < value)
 			{
+				prev = current;
 				current = current->next;
 			}
-			newNode->next = current->next;
+			if (current->data < value)
+			{
+				newNode->next = current->next;
+				current->next = newNode;
+			}
+			else
+			{
+				prev->next = newNode;
+				newNode->next = current;
+			}
+			
 			//have the pervious node point to the new Node
-			current->next = newNode;
 		}
 	}
 	
@@ -134,4 +146,30 @@ Linked_list DeleteMid(Linked_list** head_ref)
 		//Current	1		2	3	4
 	}	//Next		2		3	4	5
 	return (**head_ref);
+}
+
+void MergeList(Linked_list** A, Linked_list** B)
+{
+	Linked_list* Merge = nullptr;
+	Linked_list* a_ptr = *A;
+	Linked_list* b_ptr = *B;
+	int Num;
+	while (a_ptr->next != NULL || b_ptr->next != NULL)
+	{
+		if (a_ptr->data <= b_ptr->data)
+		{
+			int Num = a_ptr->data;
+			InsertNode(&Merge, Num);
+			a_ptr = a_ptr->next;
+		}
+		else
+		{
+			int Num = b_ptr->data;
+			InsertNode(&Merge, Num);
+			b_ptr = b_ptr->next;
+		}
+	}
+		
+
+	PrintList(Merge);
 }
